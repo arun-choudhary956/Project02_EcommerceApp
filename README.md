@@ -34,8 +34,7 @@ Seed an admin user + sample products:
 ```bash
 npm run seed
 ```
-This creates `admin` / `admin123` (change the password after first login —
-see the note at the bottom) and 6 sample products.
+This creates admin and 6 sample products.
 
 Start the API:
 
@@ -74,7 +73,7 @@ Open `http://localhost:5173`. Products load from your backend automatically.
   results update live as you type/select, no page reload.
 - **Cart**: click "Cart" in the navbar. Add/remove items, adjust quantity,
   see the running total. Persists in `localStorage` across refreshes.
-- **Admin login** (`/login`): log in with `admin` / `admin123`.
+- **Admin login** (`/login`): log in with `admin`
 - **Admin panel** (`/admin`, protected route): add, edit, delete products.
   Changes appear on the storefront immediately since it's the same database.
 
@@ -102,6 +101,7 @@ Open `http://localhost:5173`. Products load from your backend automatically.
    (Render sets this automatically, but the app reads `process.env.PORT`).
 5. Use MongoDB Atlas for `MONGO_URI` in production (whitelist Render's IPs or
    allow access from anywhere for simplicity).
+#### Render URL - https://ecommerceapp-kbv8.onrender.com
 
 **Frontend → Vercel**
 1. On [Vercel](https://vercel.com), import the repo, set root directory to
@@ -111,6 +111,7 @@ Open `http://localhost:5173`. Products load from your backend automatically.
    (e.g. `https://your-app.onrender.com/api`).
 4. Deploy. Go back to Render and set `CLIENT_ORIGIN` to your new Vercel URL,
    then redeploy the backend so CORS allows it.
+#### Vercel URL - https://ecommerceapp-chi-seven.vercel.app
 
 No `localhost` URLs are hardcoded anywhere — both ends read from environment
 variables (`VITE_API_URL` on the frontend, `CLIENT_ORIGIN`/`MONGO_URI` on the
@@ -118,8 +119,7 @@ backend), so this works identically in dev and production.
 
 ## Notes
 
-- **Change the seeded admin password** before deploying anywhere public —
-  `admin123` is only for local testing. Register a new user via
+- Register a new user via
   `POST /api/auth/register` then manually flip their `role` to `"admin"` in
   MongoDB (registration always creates `customer` accounts by design, so
   nobody can self-promote to admin through the API).
